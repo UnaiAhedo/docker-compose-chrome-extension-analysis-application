@@ -1,14 +1,6 @@
 version: '3'
 
 services:
-  topic-extraction:
-    build: ./topicextraction-main
-    ports:
-      - "8000:8000"
-  feature-detection:
-    build: ./ri-analytics-classification-google-play-review-master
-    ports:
-      - "9651:9651"
   scraping-service:
     build: ./scraping-service-chrome-extension-analysis
     ports:
