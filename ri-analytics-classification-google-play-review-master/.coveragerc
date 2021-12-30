@@ -1,0 +1,6 @@
+[run]
+omit = coverage-reports/*, demos/*, tests/*, venv/*, ml_model_bug_report.pickle, ml_model_feature_request.pickle, Dockerfile, rest_test.http, sentistrength/*, LICENSE, swagger.yaml, test/*, README.adoc, vocabulary_bigram.pickle, __init__.py, vocabulary_bow.pickle
+[html]
+directory = coverage-reports/html
+[xml]
+output = coverage-reports/coverage.xml

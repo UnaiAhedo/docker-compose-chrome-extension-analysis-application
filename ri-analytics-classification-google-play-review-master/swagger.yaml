@@ -1,0 +1,75 @@
+---
+swagger: "2.0"
+info:
+  description: This API returns a json, containing a list of processed app reviews. It expects a JSON payload that
+    contains an array of at least a single app review. An app review json object must contain a field
+    title (string), body(string), and rating (int).
+  version: "1.0.1"
+  title: Classify  app reviews from the Google Play Store
+  contact:
+    email: stanik@informatik.uni-hamburg.de
+host: 217.172.12.199:9651
+schemes:
+- http
+paths:
+  /hitec/classify/domain/google-play-reviews/:
+    post:
+      summary: Get an array of processed app reviews including all ml features.
+      description: Get an array of processed app reviews including all ml features.
+      operationId: get_classification_result
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: an array of app reviews
+          schema:
+             $ref: '#/definitions/AppReview'
+          required: true
+
+      responses:
+        200:
+          description: json array of processed app reviews including all ml features.
+          schema:
+            $ref: '#/definitions/ProcessedAppReview'
+        400:
+          description: error during the processing of the app reviews.
+definitions:
+  AppReview:
+    type: array
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+          example: My Experience so far
+        body:
+          type: string
+          example: I love this application.
+        rating:
+          type: number
+          example: 4
+  ProcessedAppReview:
+    type: array
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+          example: My Experience so far
+        body:
+          type: string
+          example: I love this application.
+        rating:
+          type: integer
+          example: 4
+        cluster_is_bug_report:
+          type: boolean
+          example: true
+        cluster_is_feature_request:
+          type: boolean
+          example: true
+        cluster_is_other:
+          type: boolean
+          example: false

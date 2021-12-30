@@ -1,0 +1,6 @@
+*.pyc
+out/*
+
+rest_test.http
+sentistrength/SentiStrength.jar
+stanford-postagger-full-2016-10-31

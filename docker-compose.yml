@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  topic-extraction:
+    build: ./topicextraction-main
+    ports:
+      - "8000:8000"
+  feature-detection:
+    build: ./ri-analytics-classification-google-play-review-master
+    ports:
+      - "9651:9651"
+  scraping-service:
+    build: ./scraping-service-chrome-extension-analysis
+    ports:
+      - "4000:4000"
+    command: sh -c "docker run -i --init --rm -p 4000:4000 --cap-add=SYS_ADMIN --name puppeteer-chrome puppeteer-chrome-linux  node -e "cat ./service.js""
