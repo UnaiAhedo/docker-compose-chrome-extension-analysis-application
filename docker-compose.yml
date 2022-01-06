@@ -17,3 +17,8 @@ services:
       - SYS_ADMIN
     init: true
     command: nodemon 
+  cors-anywhere:
+    build: ./cors-anywhere
+    ports:
+      - "8080:8080"
+   
