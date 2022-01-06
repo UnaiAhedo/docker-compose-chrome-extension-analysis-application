@@ -18,7 +18,7 @@ services:
     init: true
     command: nodemon 
   cors-anywhere:
-    build: ./cors-anywhere
+    build: ./cors-anywhere-service
     ports:
       - "8080:8080"
    
