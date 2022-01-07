@@ -65,7 +65,9 @@ app.post('/extractExtensionInfo', async (req, res) => {
       firstTime = false;
     }
 
-    await page.waitForTimeout(1125);
+    await page.waitForSelector("h1.e-f-w", {
+  	visible: true,
+    });
 
     result.push(...await getInfo(page));
 
