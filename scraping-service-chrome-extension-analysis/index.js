@@ -17,6 +17,7 @@ app.get('/searchExtensions', async (req, res) => {
       headless: true // launch headful mode
     }
   );
+  console.log('Getting urls from the query: ' + req.query.q);
   const page = await browser.newPage();
   await page.goto(req.query.q);
   await page.waitForTimeout(500);
@@ -51,7 +52,7 @@ app.post('/extractExtensionInfo', async (req, res) => {
   let firstTime = true;
 
   for (let index = 0; index < URLs.length; index++) { // for each URL get the info
-
+	console.log('Extracting info from: ' + URLs[index])
     const page = await browser.newPage();
 
     // await page.goto(req.query.q); // old version
@@ -95,7 +96,7 @@ app.post('/extractComments', async (req, res) => {
   let firstTime = true;
 
   for (let index = 0; index < URLs.length; index++) { // for each URL get the info
-
+    console.log('Extracting comments from: ' + URLs[index])
     const page = await browser.newPage();
 
     await page.goto(URLs[index]);
