@@ -61,7 +61,9 @@ app.post('/extractExtensionInfo', async (req, res) => {
     await page.goto(URLs[index]);
 
     if (firstTime) {
-      await page.waitForTimeout(1050);
+      await page.waitForSelector('div.VfPpkd-RLmnJb', {
+  	visible: true,
+    });
       // accept Google's conditions / cookies
       await page.waitForSelector('form > div > div > button > span')
       await page.click('form > div > div > button > span')
@@ -105,7 +107,9 @@ app.post('/extractComments', async (req, res) => {
 
     // accept Google's conditions / cookies
     if (firstTime) {
-      await page.waitForTimeout(1050);
+      await page.waitForSelector('div.VfPpkd-RLmnJb', {
+  	visible: true,
+    });
       // accept Google's conditions / cookies
       await page.waitForSelector('form > div > div > button > span')
       await page.click('form > div > div > button > span')
