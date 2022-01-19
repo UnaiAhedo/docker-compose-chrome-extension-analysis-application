@@ -28,7 +28,9 @@ app.get('/searchExtensions', async (req, res) => {
 
   let result = []
 
-  await page.waitForTimeout(2000);
+  await page.waitForSelector('a.h-Ja-d-Ac', {
+  	visible: true,
+    });
 
   result.push(...await getURLs(page));
 
@@ -52,7 +54,7 @@ app.post('/extractExtensionInfo', async (req, res) => {
   let firstTime = true;
 
   for (let index = 0; index < URLs.length; index++) { // for each URL get the info
-	console.log('Extracting info from: ' + URLs[index])
+    console.log('Extension ' + (index + 1) + ' of ' + URLs.length + '. Extracting info from: ' + URLs[index]);
     const page = await browser.newPage();
 
     // await page.goto(req.query.q); // old version
@@ -66,7 +68,7 @@ app.post('/extractExtensionInfo', async (req, res) => {
       firstTime = false;
     }
 
-    await page.waitForSelector("h1.e-f-w", {
+    await page.waitForSelector('div.e-f-pa', {
   	visible: true,
     });
 
@@ -96,7 +98,7 @@ app.post('/extractComments', async (req, res) => {
   let firstTime = true;
 
   for (let index = 0; index < URLs.length; index++) { // for each URL get the info
-    console.log('Extracting comments from: ' + URLs[index])
+    console.log('Extension ' + (index + 1) + ' of ' + URLs.length + '. Extracting comments from: ' + URLs[index]);
     const page = await browser.newPage();
 
     await page.goto(URLs[index]);
@@ -110,7 +112,9 @@ app.post('/extractComments', async (req, res) => {
       firstTime = false;
     }
 
-    await page.waitForTimeout(1050);
+    await page.waitForSelector('h1.e-f-w', {
+  	visible: true,
+    });
 
     let hasNext = true;
 
@@ -121,7 +125,6 @@ app.post('/extractComments', async (req, res) => {
     var comments = {};
 
     while (hasNext && maxPages > 0) {
-      await page.waitForTimeout(1050);
       comments = await extractComments(page);
       comments2 = comments2.concat(comments);
       hasNext = await page.evaluate(() => {
