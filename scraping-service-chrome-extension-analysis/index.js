@@ -31,6 +31,8 @@ app.get('/searchExtensions', async (req, res) => {
   await page.waitForSelector('a.h-Ja-d-Ac', {
   	visible: true,
     });
+    
+  await page.waitForTimeout(500);
 
   result.push(...await getURLs(page));
 
